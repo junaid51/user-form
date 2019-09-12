@@ -1,0 +1,19 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand mb-0 h1" href="#">Users</a>
+    <button [routerLink]="[ '/user-form', 'new' ]" type="button" class="btn btn-primary">Add User</button>
+  </nav>
+  <div class="container-fluid">
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap" *ngIf="users$ | async as users">
+    <h1 class="display-4" *ngIf="users.length === 0">
+      No Records found!
+    </h1>
+    <ng-container *ngIf="users.length > 0">
+      <div style="padding: 10px" *ngFor="let user of users">
+        <app-card [user]=user></app-card>
+      </div>
+    </ng-container>
+    
+  </div>
+  
+  
+</div>

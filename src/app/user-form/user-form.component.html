@@ -1,0 +1,70 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand mb-0 h1" href="#">Users</a>
+  </nav>
+  <div class="container">
+    <form novalidate (ngSubmit)="save()" [formGroup]="userForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control"
+              placeholder="Enter name"
+              [ngClass]="{'is-invalid': (userForm.get('name').touched || userForm.get('name').dirty) && !userForm.get('name').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="userForm.get('name').errors?.required">
+                Please enter your name.
+              </span>
+              <span *ngIf="userForm.get('name').errors?.minlength">
+                The first name must be longer than 3 characters.
+              </span>
+            </span>
+          </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input formControlName="email" type="email" class="form-control" placeholder="Enter email"
+          [ngClass]="{'is-invalid': (userForm.get('email').touched || userForm.get('email').dirty) && !userForm.get('email').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="userForm.get('email').errors?.required">
+              Please enter your email.
+            </span>
+            <span *ngIf="userForm.get('email').errors?.email">
+              Please enter a valid email.
+            </span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input formControlName="dob" type="date" class="form-control" placeholder="Enter your date of birth"
+          [ngClass]="{'is-invalid': (userForm.get('dob').touched || userForm.get('dob').dirty) && !userForm.get('dob').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="userForm.get('dob').errors?.required">
+              Please enter your dob.
+            </span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Avatar</label>
+          <input formControlName="avatar" type="text" class="form-control" placeholder="Please enter a valid image link">
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input formControlName="country" type="text" class="form-control" placeholder="Enter country">
+        </div>
+        <div *ngIf="errorMessage">
+          {{errorMessage}}
+        </div>
+        <div style="display: flex; justify-content: flex-end">
+            <button
+              style="margin-right: 2px"
+              [routerLink]="['/user-list']"
+              title="Go Back"
+              class="btn btn-secondary">Back</button>
+          <button
+            [disabled]="!userForm.valid"
+            [title]="userForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            type="submit"
+            class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+</div>
